@@ -1,5 +1,7 @@
 package lab6;
 
+import java.util.Objects;
+
 import static java.lang.IO.println;
 import static java.lang.String.format;
 
@@ -19,13 +21,13 @@ public class Triangle extends Shape implements Drawable, Scalable {
 
 
     @Override
-    double getArea() {
+    public double getArea() {
         double s = getPerimeter() / 2;
         return Math.sqrt(s * (s - a) * (s - b) * (s - c));
     }
 
     @Override
-    double getPerimeter() {
+    public double getPerimeter() {
         return a + b + c;
     }
 
@@ -39,5 +41,17 @@ public class Triangle extends Shape implements Drawable, Scalable {
         a *= factor;
         b *= factor;
         c *= factor;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Triangle triangle = (Triangle) o;
+        return Double.compare(a, triangle.a) == 0 && Double.compare(b, triangle.b) == 0 && Double.compare(c, triangle.c) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(a, b, c);
     }
 }

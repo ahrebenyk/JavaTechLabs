@@ -1,5 +1,7 @@
 package lab6;
 
+import java.util.Objects;
+
 import static java.lang.IO.println;
 import static java.lang.String.format;
 
@@ -13,12 +15,12 @@ public class Rectangle extends Shape implements Drawable, Scalable {
     }
 
     @Override
-    double getArea() {
+    public double getArea() {
         return width * height;
     }
 
     @Override
-    double getPerimeter() {
+    public double getPerimeter() {
         return 2 * (width + height);
     }
 
@@ -32,4 +34,17 @@ public class Rectangle extends Shape implements Drawable, Scalable {
         width *= factor;
         height *= factor;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Rectangle rectangle = (Rectangle) o;
+        return Double.compare(width, rectangle.width) == 0 && Double.compare(height, rectangle.height) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(width, height);
+    }
+
 }
